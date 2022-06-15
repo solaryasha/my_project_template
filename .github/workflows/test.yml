@@ -23,7 +23,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Find updated files in git
+      - name: Sync files to s3
         shell: bash
         run: |
           FILES=()
@@ -31,14 +31,9 @@ jobs:
               FILES+=( "$i" )
           done
           echo "${FILES[@]}"
-      - name: Prepare commands for aws s3 credentials
-        shell: bash
-        run: |
           CMDS=()
           for i in "${FILES[@]}"; do
               CMDS+=("--include=$i""*")
           done
           echo "${CMDS[@]}"
-      - name: Copy files to the s3 mate-github bucket
-        run:
-          echo "${CMDS[@]}" | xargs aws s3 sync s3://${{ env.BUCKET_NAME }}/learn --delete --exclude "*"
+          echo "${CMDS[@]}" | xargs aws s3 sync . s3://${{ env.BUCKET_NAME }}/learn --delete --exclude "*"
