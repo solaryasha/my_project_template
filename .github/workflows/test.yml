@@ -36,4 +36,4 @@ jobs:
               CMDS+=("--include=$i""*")
           done
           echo "${CMDS[@]}"
-          echo "${CMDS[@]}" | xargs aws s3 sync . s3://${{ env.BUCKET_NAME }}/learn --delete --exclude "*"
+          echo "${CMDS[@]}" | xargs aws s3 sync . s3://test-bucket-for-content-sync --delete --exclude "*"
