@@ -31,6 +31,14 @@ jobs:
               FILES+=( "$i" )
           done
           echo "${FILES[@]}"
+      - name: Prepare commands for aws s3 credentials
+        shell: bash
+        run: |
+          CMDS=()
+          for i in "${FILES[@]}"; do
+              CMDS+=("--include=$i""*")
+          done
+          echo "${CMDS[@]}"
       - name: Copy files to the s3 mate-github bucket
         run:
-          aws s3 sync --size-only . s3://${{ env.BUCKET_NAME }}/learn
+          echo "${CMDS[@]}" | xargs aws s3 sync s3://${{ env.BUCKET_NAME }}/learn --delete --exclude "*"
