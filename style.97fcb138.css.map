@@ -1,1 +1,1 @@
-{"version":3,"sources":["style.scss"],"names":[],"mappings":"AAAA,OACE","file":"style.97fcb138.css","sourceRoot":"../src","sourcesContent":[".class {\n  color: aqua;\n}\n"]}
+{"version":3,"sources":["style.scss"],"names":[],"mappings":"AAAA,OACE,WAGF,UACE","file":"style.97fcb138.css","sourceRoot":"../src","sourcesContent":[".class {\n  color: aqua;\n}\n\n.selector {\n  background-color: #fff;\n}\n"]}
